@@ -9,7 +9,10 @@ pipeline {
 		}
 		stage(build) {
 			steps{
+				
 				sh "mvn clean install -DskipTests"
+				echo "build done "
+				
 			}
 		}
 		stage(test) {
