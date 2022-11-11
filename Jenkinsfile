@@ -1,30 +1,25 @@
 pipeline {
 	agent {
-		lable 'slave'
+		label 'slave'
 	}
-	
+	tools {
+		maven 'm1'
+	}
 	stages {
-		stage(clone) {
-			steps{
-				git "https://github.com/Sh0bhitha/java-maven-app.git"
+		stage('build') {
+			steps {
+				sh 'mvn -B -DskipTests clean install'
 			}
 		}
-		stage(build) {
-			steps{
-				sh "mvn clean install -DskipTests"
-			}
-		}
-		stage(test) {
-			steps{
-				sh "mvn test"
+		stage('test') {
+			steps {
+				sh 'mvn test'
 			}
 			post {
 				always {
-					  junit "target/surefire-reports/*.xml"
-					  archiveArtifacts 'target/*.jar'
+					jnuit 'target/surefire-reports/*.xml'
 				}
 			}
 		}
-		
 	}
 }
