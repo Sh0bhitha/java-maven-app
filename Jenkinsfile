@@ -17,7 +17,10 @@ pipeline {
 			}
 			post {
 				always {
-					junit 'target/surefire-reports/*.xml'
+					jnuit 'target/surefire-reports/*.xml'
+				}
+				sucess{
+					sh 'cp /var/lib/jenkins/workspace/"first multi-configuration"/slave/myslave/target/*.jar /home/shobhitha/tomcat/tomcat2/tomcat2/webapps'
 				}
 			}
 		}
